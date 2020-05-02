@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from reminders.views import reminders_page
+from user_management.views import login_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', reminders_page, name="reminders_page"),
+    path('login/', login_page, name="login_page"),
 ]

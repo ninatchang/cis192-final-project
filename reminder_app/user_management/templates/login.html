@@ -37,11 +37,19 @@
         <div class="navbar-end">
           <div class="navbar-item">
             
-            <div class="buttons">
-                <a class="button" href="/login">
-                  <strong>Sign Up/Log In</strong>
+            {% if user %}
+                <div class="buttons">
+                <a class="button" href="/logout">
+                    <strong>Hello {{user}}, logout</strong>
                 </a>
-              </div>
+                </div>
+            {% else %}
+                <div class="buttons">
+                <a class="button" href="/login">
+                    <strong>Sign up or Log in</strong>
+                </a>
+                </div>
+            {% endif %}
             
           </div>
         </div>

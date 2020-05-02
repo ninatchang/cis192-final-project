@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from reminders.views import reminders_page
-from user_management.views import login_page
+from user_management.views import login_view, signup_view, logout_
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', reminders_page, name="reminders_page"),
-    path('login/', login_page, name="login_page"),
+    path('login/', login_view, name="login_page"),
+    path('signup/', signup_view, name='signup_view'),
+    path('logout/', logout_, name='logout_'),
 ]

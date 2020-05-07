@@ -12,9 +12,13 @@ def remindersPage(request):
     remainingTime = []
     for r in reminders:
         if r.dueTimeStamp:
-            remainingTime.append(humanfriendly.format_timespan(r.dueTimeStamp.replace(tzinfo=None) - datetime.now().replace(tzinfo=None)))
+            if r.dueTimeStamp.replace(tzinfo=None) > datetime.now().replace(tzinfo=None):
+                remainingTime.append(humanfriendly.format_timespan(r.dueTimeStamp.replace(tzinfo=None) - datetime.now().replace(tzinfo=None)))
+            else:
+                remainingTime.append("It's already due! HURRY UP")
         else:
             remainingTime.append("No set due date! Take your time!!")
+    print(reminders)
     return render(request, 'reminders.html', {"reminders": zip(reminders, remainingTime), "user": request.user if not request.user.is_anonymous else None, "suggestion" : request.session.get("suggestion") if request.session.get("suggestion") else ""})
 
 @login_required(login_url="/login/")

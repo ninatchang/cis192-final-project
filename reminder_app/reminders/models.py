@@ -7,3 +7,9 @@ class Reminder(models.Model):
     body = models.TextField()
     creationTimeStamp = models.DateTimeField(auto_now_add=True)
     dueTimeStamp = models.DateTimeField()
+
+    def __repr__(self):
+        return 'Task body: %s; Task due date: %s' % (self.body, self.dueTimeStamp)
+
+    # def __timeRemaining__(self):
+

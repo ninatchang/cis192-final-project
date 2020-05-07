@@ -95,12 +95,13 @@
               <div class="row">
                   <div class="box social">
                       <div class="buttons">
-                        <a class="button" href="{% url 'deleteTask' reminderId=reminder.reminderId %}">
+                        <a class="button" href="{% url 'deleteTask' reminderId=reminder.0.reminderId %}">
                             <strong>Mark as complete</strong>
                         </a>
                       </div>
-                      <p class="title is-2">{{ reminder.body }}</p>
-                      <p class="subtitle is-4 is-marginless">Due date: {{ reminder.dueTimeStamp }}</p>
+                      <p class="title is-2">{{ reminder.0.body }}</p>
+                      <p class="subtitle is-4 is-marginless">Due date: {{ reminder.0.dueTimeStamp }}</p>
+                      <p class="subtitle is-4 is-marginless">Time left to complete task: {{ reminder.1 }}</p>
                     </div>
                   <br>
               </div>

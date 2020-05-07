@@ -11,13 +11,7 @@ def remindersPage(request):
     reminders = Reminder.objects.filter(creator=request.user).order_by('dueTimeStamp')
     remainingTime = []
     for r in reminders:
-        if r.dueTimeStamp:
-            if r.dueTimeStamp.replace(tzinfo=None) > datetime.now().replace(tzinfo=None):
-                remainingTime.append(humanfriendly.format_timespan(r.dueTimeStamp.replace(tzinfo=None) - datetime.now().replace(tzinfo=None)))
-            else:
-                remainingTime.append("It's already due! HURRY UP")
-        else:
-            remainingTime.append("No set due date! Take your time!!")
+        remainingTime.append(r.__timeRemaining__())
     print(reminders)
     return render(request, 'reminders.html', {"reminders": zip(reminders, remainingTime), "user": request.user if not request.user.is_anonymous else None, "suggestion" : request.session.get("suggestion") if request.session.get("suggestion") else ""})
 

@@ -22,12 +22,7 @@ def createTask(request):
     queries = QueryDict(request.body)
     taskBody = queries["taskBody"]
     taskDueDate = queries["reminderDueDate"]
-    currentTask = None
-    if (taskDueDate == ''):
-        currentTask = Reminder.objects.create(creator=request.user, body=taskBody)
-    else:
-        currentTask = Reminder.objects.create(creator=request.user, body=taskBody, dueTimeStamp=taskDueDate)
-
+    
     reminders = Reminder.objects.filter(creator=request.user).order_by('dueTimeStamp')
     return redirect("/")
     

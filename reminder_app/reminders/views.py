@@ -17,3 +17,11 @@ def create_task(request):
 
     reminders = Reminder.objects.all()
     return render(request, 'reminders.html', {"reminders": reminders, "user": request.user if not request.user.is_anonymous else None})
+
+@login_required(login_url="/login/")
+def deleteTask(request, reminderId):
+    task = Reminder.objects.get(reminderId = reminderId)
+    task.delete()
+    
+    reminders = Reminder.objects.filter(creator=request.user)
+    return render(request, 'reminders.html', {"reminders": reminders, "user": request.user if not request.user.is_anonymous else None})

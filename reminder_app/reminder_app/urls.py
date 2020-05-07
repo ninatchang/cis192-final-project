@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from reminders.views import reminders_page, create_task
+from reminders.views import reminders_page, create_task, deleteTask
 from user_management.views import login_view, signup_view, logout_
 
 urlpatterns = [
@@ -25,4 +25,5 @@ urlpatterns = [
     path('signup/', signup_view, name='signup_view'),
     path('logout/', logout_, name='logout_'),
     path('createTask/', create_task, name="create_task"),
+    path('deleteTask/<int:reminderId>', deleteTask, name="deleteTask"),
 ]

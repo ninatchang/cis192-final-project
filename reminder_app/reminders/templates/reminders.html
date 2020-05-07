@@ -93,10 +93,15 @@
             <!-- each of this is a box -->
             {% for reminder in reminders %}
               <div class="row">
-                  <a class="box social" href="/" target="_blank">
-                      <p class="title is-2">something</p>
-                      <p class="subtitle is-4 is-marginless">reminder</p>
-                  </a>
+                  <div class="box social">
+                      <div class="buttons">
+                        <a class="button" href="{% url 'deleteTask' reminderId=reminder.reminderId %}">
+                            <strong>Mark as complete</strong>
+                        </a>
+                      </div>
+                      <p class="title is-2">{{ reminder.body }}</p>
+                      <p class="subtitle is-4 is-marginless">Due date: {{ reminder.dueTimeStamp }}</p>
+                    </div>
                   <br>
               </div>
             {% empty %}

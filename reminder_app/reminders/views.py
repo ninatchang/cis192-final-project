@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from reminders.models import Reminder
 
 # Create your views here.
 def reminders_page(request):
-    return render(request, 'reminders.html', {"user": request.user if not request.user.is_anonymous else None})
+    reminders = Reminder.objects.all()
+    return render(request, 'reminders.html', {"reminders": reminders, "user": request.user if not request.user.is_anonymous else None})

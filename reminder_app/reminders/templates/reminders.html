@@ -78,13 +78,15 @@
         <div class="rows">
             
                 <!-- each of this is a box -->
+                {% for reminder in reminders %}
                 <div class="row">
                     <a class="box social" href="/" target="_blank">
                         <p class="title is-2">something</p>
-                        <p class="subtitle is-4 is-marginless">something</p>
+                        <p class="subtitle is-4 is-marginless">reminder</p>
                     </a>
                     <br>
                 </div>
+                {% endfor %}
 
                 <div class="row">
                     <a class="box social" href="/" target="_blank">

@@ -13,7 +13,7 @@
 - Reminder
 	- Magic methods
 		- __ str __
-		- __ timeRemaining __
+		- __ setAttr __
 ### First class packages
 - datetime: for easy calculations of time left to complete task
 - random: for randomly generating tasks to complete

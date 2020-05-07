@@ -19,7 +19,7 @@ class Reminder(models.Model):
         If the task is overdue, it returns a message telling the user to hurry up
         If the task has no due date, it returns a message telling the user that it has no due date
     '''
-    def __timeRemaining__(self):
+    def timeRemaining(self):
         if self.dueTimeStamp:
             if self.dueTimeStamp.replace(tzinfo=None) > datetime.now().replace(tzinfo=None):
                 return humanfriendly.format_timespan(self.dueTimeStamp.replace(tzinfo=None) - datetime.now().replace(tzinfo=None))

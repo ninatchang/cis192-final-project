@@ -9,7 +9,7 @@ def remindersPage(request):
     reminders = Reminder.objects.filter(creator=request.user).order_by('dueTimeStamp')
     remainingTime = []
     for r in reminders:
-        remainingTime.append(r.__timeRemaining__())
+        remainingTime.append(r.timeRemaining())
     print(reminders)
     return render(request, 'reminders.html', {"reminders": zip(reminders, remainingTime), "user": request.user if not request.user.is_anonymous else None, "suggestion" : request.session.get("suggestion") if request.session.get("suggestion") else ""})
 

@@ -4,12 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.http import QueryDict
 
 # Create your views here.
-def reminders_page(request):
+def remindersPage(request):
     reminders = Reminder.objects.filter(creator=request.user).order_by('dueTimeStamp')
     return render(request, 'reminders.html', {"reminders": reminders, "user": request.user if not request.user.is_anonymous else None})
 
 @login_required(login_url="/login/")
-def create_task(request):
+def createTask(request):
     queries = QueryDict(request.body)
     taskBody = queries["taskBody"]
     taskDueDate = queries["reminderDueDate"]

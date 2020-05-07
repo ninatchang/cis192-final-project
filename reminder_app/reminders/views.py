@@ -5,7 +5,7 @@ from django.http import QueryDict
 
 # Create your views here.
 def reminders_page(request):
-    reminders = Reminder.objects.filter(creator=request.user)
+    reminders = Reminder.objects.filter(creator=request.user).order_by('dueTimeStamp')
     return render(request, 'reminders.html', {"reminders": reminders, "user": request.user if not request.user.is_anonymous else None})
 
 @login_required(login_url="/login/")
@@ -15,7 +15,7 @@ def create_task(request):
     taskDueDate = queries["reminderDueDate"]
     currentTask = Reminder.objects.create(creator=request.user, body=taskBody, dueTimeStamp=taskDueDate)
 
-    reminders = Reminder.objects.all()
+    reminders = Reminder.objects.filter(creator=request.user).order_by('dueTimeStamp')
     return render(request, 'reminders.html', {"reminders": reminders, "user": request.user if not request.user.is_anonymous else None})
 
 @login_required(login_url="/login/")
@@ -23,5 +23,5 @@ def deleteTask(request, reminderId):
     task = Reminder.objects.get(reminderId = reminderId)
     task.delete()
     
-    reminders = Reminder.objects.filter(creator=request.user)
+    reminders = Reminder.objects.filter(creator=request.user).order_by('dueTimeStamp')
     return render(request, 'reminders.html', {"reminders": reminders, "user": request.user if not request.user.is_anonymous else None})

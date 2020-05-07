@@ -8,11 +8,18 @@ class Reminder(models.Model):
     creator = models.CharField(max_length=200)
     body = models.TextField()
     creationTimeStamp = models.DateTimeField(auto_now_add=True)
-    dueTimeStamp = models.DateTimeField()
+    dueTimeStamp = models.DateTimeField(default=None, blank=True, null=True)
 
     ''' String representation of reminder objects '''
     def __repr__(self):
         return 'Task body: %s; Task due date: %s' % (self.body, self.dueTimeStamp)
+    
+    ''' When setting attributes for object, if date is an empty string, override with None ''' 
+    def __setattr__(self, name, value):
+        if name == "dueTimeStamp" and not value:
+            super(models.Model, self).__setattr__(name, None)
+        else:
+            super(models.Model, self).__setattr__(name, value)
 
     ''' Calculate the amount of time remained to complete task
         If there is still time to complete, it returns the amount of time left

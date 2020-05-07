@@ -19,10 +19,8 @@ def createTask(request):
     queries = QueryDict(request.body)
     taskBody = queries["taskBody"]
     taskDueDate = queries["reminderDueDate"]
-    if (taskDueDate == ''):
-        currentTask = Reminder.objects.create(creator=request.user, body=taskBody)
-    else:
-        currentTask = Reminder.objects.create(creator=request.user, body=taskBody, dueTimeStamp=taskDueDate)
+    print(taskDueDate)
+    currentTask = Reminder.objects.create(creator=request.user, body=taskBody, dueTimeStamp=taskDueDate)
     return redirect("/")
 
 ''' Delete task for logged in user when s/he marks it as complete '''

@@ -5,7 +5,7 @@ from django.http import QueryDict
 
 # Create your views here.
 def reminders_page(request):
-    reminders = Reminder.objects.all()
+    reminders = Reminder.objects.filter(creator=request.user)
     return render(request, 'reminders.html', {"reminders": reminders, "user": request.user if not request.user.is_anonymous else None})
 
 @login_required(login_url="/login/")

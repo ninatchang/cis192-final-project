@@ -73,29 +73,40 @@
     </div>
 </section>
 
+{% if user %}
+  <div class="field">
+    <form method="POST" action="/createTask/">
+      {% csrf_token %}
+      <label for="taskBody">Task name:</label>
+      <input class="input" name="taskBody" placeholder="Enter new task here..." />
+      <label for="reminderDueDate">Task due date:</label>
+      <input class="input" type="datetime-local" name="reminderDueDate" />
+      <input class="button is-primary" type="submit" />
+    </form>
+  </div>
+{% endif %}
+
 <section class="content tiles">
     <div class="container">
         <div class="rows">
-            
-                <!-- each of this is a box -->
-                {% for reminder in reminders %}
-                <div class="row">
-                    <a class="box social" href="/" target="_blank">
-                        <p class="title is-2">something</p>
-                        <p class="subtitle is-4 is-marginless">reminder</p>
-                    </a>
-                    <br>
-                </div>
-                {% endfor %}
+          {% if user %}
+            <!-- each of this is a box -->
+            {% for reminder in reminders %}
+              <div class="row">
+                  <a class="box social" href="/" target="_blank">
+                      <p class="title is-2">something</p>
+                      <p class="subtitle is-4 is-marginless">reminder</p>
+                  </a>
+                  <br>
+              </div>
+            {% empty %}
+              No reminder items! 
+            {% endfor %}
+          {% else %}
+            Log in to see reminder items!
+          {% endif %}  
+                
 
-                <div class="row">
-                    <a class="box social" href="/" target="_blank">
-                        <p class="title is-2">something</p>
-                        <p class="subtitle is-4 is-marginless">something</p>
-                    </a>
-                    <br>
-                </div>
-    
         </div>
     </div>
 </section>

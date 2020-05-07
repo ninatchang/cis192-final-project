@@ -22,22 +22,21 @@ def createTask(request):
     queries = QueryDict(request.body)
     taskBody = queries["taskBody"]
     taskDueDate = queries["reminderDueDate"]
-
-    reminders = Reminder.objects.filter(creator=request.user).order_by('dueTimeStamp')
+    if (taskDueDate == ''):
+        currentTask = Reminder.objects.create(creator=request.user, body=taskBody)
+    else:
+        currentTask = Reminder.objects.create(creator=request.user, body=taskBody, dueTimeStamp=taskDueDate)
     return redirect("/")
     
 @login_required(login_url="/login/")
 def deleteTask(request, reminderId):
     task = Reminder.objects.get(reminderId = reminderId)
     task.delete()
-    
-    reminders = Reminder.objects.filter(creator=request.user).order_by('dueTimeStamp')
     return redirect("/")
 
 @login_required(login_url="/login/")
 def chooseRandom(request):
     reminders = Reminder.objects.filter(creator=request.user).order_by('dueTimeStamp')
-
     choice = random.randint(0, len(reminders) - 1)
     if (len(reminders) != 0):
         request.session["suggestion"] = reminders[choice].body

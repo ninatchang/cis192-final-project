@@ -22,5 +22,5 @@ def signup_view(request):
 ''' Execute user log out operation '''
 def logout_(request):
     logout(request)
-    return redirect("/login")
+    return redirect("/")
 

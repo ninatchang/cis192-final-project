@@ -2,33 +2,27 @@
   
 <title>Todo List</title>
 
-<link href="https://klimchuk.com/css/theme.min.bd3d534728a556545c3ae69c25e188f2cf6d7bd92afad324ae9383f7ed23cb2f.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
 <style type="text/css">
   body {
-    padding-top: 15px;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
     -ms-flex-align: center;
     align-items: center;
     background-color: rgb(252, 221, 255);
+    overflow-y: scroll;
+    height: 400px;
     }
-  .loginDiv {
+  .todoDiv {
       width: 600px;
+      height: 700px;
       position: fixed;
       top: 55%;
       left: 50%;
       transform: translate(-50%, -50%);
   }
-  .jumboDiv {
-      width: 850px;
-      position: fixed;
-      top: 20%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-  }
   .button-background {
-    background-color: #8ABAD3FF;
+    background-color: rgb(109, 174, 209);
     border-color: #8ABAD3FF;
   }
   </style>
@@ -36,68 +30,55 @@
 <body>
   {% if user %}
   <header class="section">
-  <div class="container">
-    <nav class="navbar" role="navigation" aria-label="main navigation" style="height: 70px;">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/" style="margin-top: 15px;">
-          <figure class="image is-64x64 is-square is-hidden-touch">
-            <img src="https://previews.123rf.com/images/veronawinner/veronawinner1804/veronawinner180400009/99138376-checklist-icon-in-flat-style-to-do-list-symbol-isolated-on-white-background-simple-abstract-check-li.jpg" srcset="https://previews.123rf.com/images/veronawinner/veronawinner1804/veronawinner180400009/99138376-checklist-icon-in-flat-style-to-do-list-symbol-isolated-on-white-background-simple-abstract-check-li.jpg" alt="logo" class="is-rounded">
-          </figure>
-        </a>
-      </div>
-
-      <div id="navigation" class="navbar-menu">
-        <div class="navbar-start">
-          
-          <a href="/" class="navbar-item">
-            <span class="navbar-item-name">Todo List</span>
-          </a>
-
-          <a href="/" class="navbar-item">
-            <span class="navbar-item-name">About</span>
-          </a>
-          
+    <div>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="main navigation">
+          <a class="navbar-brand" href="/">
+              <img style="width: 30px; height:30px" src="https://previews.123rf.com/images/veronawinner/veronawinner1804/veronawinner180400009/99138376-checklist-icon-in-flat-style-to-do-list-symbol-isolated-on-white-background-simple-abstract-check-li.jpg" srcset="https://previews.123rf.com/images/veronawinner/veronawinner1804/veronawinner180400009/99138376-checklist-icon-in-flat-style-to-do-list-symbol-isolated-on-white-background-simple-abstract-check-li.jpg" alt="logo" class="is-rounded">
+              PyToDo
+            </a>
+  
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto"> 
+            <li class="nav item"> 
+            <a href="/" class="nav-link"> About </a> 
+          </li>
+          <li class="nav item"> 
+            <a href="/login" class="nav-link"> Sign Up </a> 
+          </li>
+        </ul>
+          {% if user %}
+              <a lass="btn btn-info" href="/logout">
+                  Hello {{user}}, logout
+              </a>
+          {% else %}
+              <a class="btn btn-info" href="/">
+                  Return to Log in
+              </a>
+          {% endif %}
         </div>
-
-        <div class="navbar-end" style="margin-right: 20px">
-          <div class="navbar-item">
-            
-            {% if user %}
-                <a class="btn btn-info" href="/logout">
-                    <strong>Hello {{user}}, logout</strong>
-                </a>
-            {% else %}
-                <a class="btn btn-info" href="/login">
-                    <strong>Sign up</strong>
-                </a>
-            {% endif %}
-            
-          </div>
-        </div>
-      </div>
-    </nav>
-  </div>
-</header>
+      </nav>
+    </div>
+  </header>
 {% endif %}
 
-<div class="main section">
+<div class="todoDiv">
 
 {% if user %}
-  <div>
     <form method="POST" action="/createTask/">
       {% csrf_token %}
-      <div class="card" style="background-color: aquamarine;"> 
+      <div class="card" style="margin-bottom: 20px"> 
         <div class="card-header"> New Task </div>
         <div class="card-body">
       <label class="card-title">Task name:</label>
-      <input class="input-group" name="taskBody" placeholder="Enter new task here..." />
+      <br>
+      <input class="input" name="taskBody" placeholder="Enter new task here..." />
+      <br> 
       <label for="reminderDueDate">Task due date:</label>
       <input class="input" type="datetime-local" name="reminderDueDate" />
-      <input class="button is-primary" type="submit" />
+      <input class="btn btn-primary" type="submit" />
     </div>
     </div>
     </form>
-  </div>
 {% endif %}
 
 <section class="content tiles">
@@ -107,27 +88,34 @@
             <!-- each of this is a box -->
             {% for reminder in reminders %}
               <div class="row">
-                  <div class="box social">
-                      <div class="buttons">
-                        <a class="button" href="{% url 'deleteTask' reminderId=reminder.0.reminderId %}">
-                            <strong>Mark as complete</strong>
-                        </a>
-                      </div>
-                      <p class="title is-2">{{ reminder.0.body }}</p>
-                      <p class="subtitle is-4 is-marginless">Due date: {{ reminder.0.dueTimeStamp }}</p>
-                      <p class="subtitle is-4 is-marginless">Time left to complete task: {{ reminder.1 }}</p>
+                  <div class="card" style="width: 600px; margin-bottom: 20px">
+                    <div class="card-header"> To-do </div>
+                    <div class="card-body"> 
+                      <h5 class="card-title">{{ reminder.0.body }}</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">Due date: {{ reminder.0.dueTimeStamp }}</h6>
+                      <h6 class="card-subtitle mb-2 text-muted">Time left to complete task: {{ reminder.1 }}</h6>
+                      <a class="btn btn-primary" href="{% url 'deleteTask' reminderId=reminder.0.reminderId %}">
+                        Mark as complete
+                    </a>
+                    </div>
                     </div>
                   <br>
               </div>
             {% empty %}
-              No reminder items! 
+            <div class="card"> 
+              <div class="card-body">
+                There are no more to-dos! Hooray! Unless..you want to add one?
+              </div>
+            </div>
             {% endfor %}
           {% else %}
           <div class="jumboDiv">
-          <div class="jumbotron" style="background-color: #FFFFFF; width: 850px">
-            <div style="padding-bottom: 20px;"> 
-            <img style="margin-bottom: 40px; width: 100px; height: 100px; float: left;" src="https://previews.123rf.com/images/veronawinner/veronawinner1804/veronawinner180400009/99138376-checklist-icon-in-flat-style-to-do-list-symbol-isolated-on-white-background-simple-abstract-check-li.jpg" srcset="https://previews.123rf.com/images/veronawinner/veronawinner1804/veronawinner180400009/99138376-checklist-icon-in-flat-style-to-do-list-symbol-isolated-on-white-background-simple-abstract-check-li.jpg" alt="logo" class="is-rounded">
-            <h1 class="display-4">Welcome to PyToDo</h1> 
+          <div class="jumbotron" style="background-color: #FFFFFF">
+            <div class="row" style="width: 900px">
+              <div class="span4" style="width: 800px">
+            <img style="width: 100px; height: 100px; float: left;" src="https://previews.123rf.com/images/veronawinner/veronawinner1804/veronawinner180400009/99138376-checklist-icon-in-flat-style-to-do-list-symbol-isolated-on-white-background-simple-abstract-check-li.jpg" srcset="https://previews.123rf.com/images/veronawinner/veronawinner1804/veronawinner180400009/99138376-checklist-icon-in-flat-style-to-do-list-symbol-isolated-on-white-background-simple-abstract-check-li.jpg" alt="logo" class="is-rounded">
+            <h1 class="display-4" style="text-size-adjust: 100px">Welcome to PyToDo</h1> 
+          </div> 
           </div>
         </div>
       </div>
@@ -139,11 +127,11 @@
                 <label for="username">Username</label>
                 <input name="username" size="20" class="form-control" placeholder="Enter username">
               </div>
-              <div class="form-group" style="margin-bottom: 15px">
+              <div class="form-group" style="margin-bottom: 30px">
                 <label for="password">Password</label>
                 <input name="password" size="20" class="form-control" placeholder="Enter password" type="password">
               </div>
-                <input type="submit" name="xyz" value="Log In" class="btn btn-lg btn-primary button-background btn-block" style="margin-bottom: 20px">
+                <input type="submit" name="xyz" value="Log In" class="btn btn-lg btn-info button-background btn-block" style="margin-bottom: 20px">
                 <a class="btn btn-lg btn-primary button-background btn-block" href="/login" role="button">Sign Up</a>
           </form>
         </div>
@@ -156,12 +144,15 @@
 
 {% if user %}
 <section class="suggestion">
-  <div>
-    <p>Having trouble deciding where to start? Let us pick.</p>
-    <a class="button" href="{% url 'chooseRandom'%}">
-      <strong>Get Suggestion</strong>
+  <div class="card text-center">
+    <div class="card-header"> Having trouble deciding where to start? Let us pick. </div>
+    <div class="card-body">
+    <a class="btn btn-primary" href="{% url 'chooseRandom'%}" style="align-items: center;">
+      Get Suggestion
     </a>
-  <p>{{suggestion}}</p>
+    <div style="margin-bottom: 10px;"> </div>
+  <h5 style="text-align: center;">You should complete: {{suggestion}}</h5>
+</div>
   </div>
 
 </section>

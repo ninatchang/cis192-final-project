@@ -23,7 +23,7 @@
       transform: translate(-50%, -50%);
   }
   .button-background {
-    background-color: #8ABAD3FF;
+    background-color:  rgb(109, 174, 209);
     border-color: #8ABAD3FF;
   }
   </style>
@@ -45,11 +45,11 @@
       </ul>
         {% if user %}
             <a lass="btn btn-info" href="/logout">
-                <strong>Hello {{user}}, logout</strong>
+                Hello {{user}}, logout
             </a>
         {% else %}
             <a class="btn btn-info" href="/">
-                <strong>Return to Log in</strong>
+                Return to Log in
             </a>
         {% endif %}
       </div>

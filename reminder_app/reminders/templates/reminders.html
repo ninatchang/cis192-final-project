@@ -7,7 +7,28 @@
 <meta name="theme-color" content="#ffffff">
 
 <link href="https://klimchuk.com/css/theme.min.bd3d534728a556545c3ae69c25e188f2cf6d7bd92afad324ae9383f7ed23cb2f.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<style type="text/css">
+  body {
+    padding-top: 20px;
+    padding-bottom: 40px;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: rgb(252, 221, 255);
+    }
+  .firstDiv {
+      width: 550px;
+      position: fixed;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+  }
+  .button-background {
+    background-color: #8ABAD3FF;
+    border-color: #8ABAD3FF;
+  }
+  </style>
 
 <body>
   <header class="section">
@@ -46,7 +67,7 @@
             {% else %}
                 <div class="buttons">
                 <a class="button" href="/login">
-                    <strong>Sign up or Log in</strong>
+                    <strong>Sign up</strong>
                 </a>
                 </div>
             {% endif %}
@@ -109,7 +130,13 @@
               No reminder items! 
             {% endfor %}
           {% else %}
-            Log in to see reminder items!
+          <h1 class="title">Log In</h1>
+          <form method="POST" action="/login/">
+              {% csrf_token %}
+              <input class="input" name="username" placeholder="username" />
+              <input class="input" name="password" placeholder="password" type="password" />
+              <input class="button" type="submit" />
+          </form>
           {% endif %}  
                 
 

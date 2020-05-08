@@ -34,9 +34,11 @@ def deleteTask(request, reminderId):
 @login_required(login_url="/login/")
 def chooseRandom(request):
     reminders = Reminder.objects.filter(creator=request.user).order_by('dueTimeStamp')
-    choice = random.randint(0, len(reminders) - 1)
     if (len(reminders) != 0):
+        choice = random.randint(0, len(reminders) - 1)
         request.session["suggestion"] = reminders[choice].body
+    else:
+        request.session["suggestion"] = "no active tasks"
     return redirect("/")
 
 

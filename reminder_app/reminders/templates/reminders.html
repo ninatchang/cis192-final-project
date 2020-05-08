@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-<html lang="en-US" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# fb: http://ogp.me/ns/fb#" class="hydrated"><head>
   
 <title>Todo List</title>
 
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="theme-color" content="#ffffff">
-
 <link href="https://klimchuk.com/css/theme.min.bd3d534728a556545c3ae69c25e188f2cf6d7bd92afad324ae9383f7ed23cb2f.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
 <style type="text/css">
   body {
@@ -87,14 +83,19 @@
 <div class="main section">
 
 {% if user %}
-  <div class="field">
+  <div>
     <form method="POST" action="/createTask/">
       {% csrf_token %}
-      <label for="taskBody">Task name:</label>
-      <input class="input" name="taskBody" placeholder="Enter new task here..." />
+      <div class="card" style="background-color: aquamarine;"> 
+        <div class="card-header"> New Task </div>
+        <div class="card-body">
+      <label class="card-title">Task name:</label>
+      <input class="input-group" name="taskBody" placeholder="Enter new task here..." />
       <label for="reminderDueDate">Task due date:</label>
       <input class="input" type="datetime-local" name="reminderDueDate" />
       <input class="button is-primary" type="submit" />
+    </div>
+    </div>
     </form>
   </div>
 {% endif %}

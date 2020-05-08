@@ -11,16 +11,23 @@
 
 <style type="text/css">
   body {
-    padding-top: 20px;
-    padding-bottom: 40px;
+    padding-top: 15px;
+    padding-bottom: 30px;
     -ms-flex-align: center;
     align-items: center;
     background-color: rgb(252, 221, 255);
     }
-  .firstDiv {
-      width: 550px;
+  .loginDiv {
+      width: 600px;
       position: fixed;
-      top: 45%;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+  }
+  .jumboDiv {
+      width: 850px;
+      position: fixed;
+      top: 20%;
       left: 50%;
       transform: translate(-50%, -50%);
   }
@@ -31,11 +38,12 @@
   </style>
 
 <body>
+  {% if user %}
   <header class="section">
   <div class="container">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar" role="navigation" aria-label="main navigation" style="height: 70px;">
       <div class="navbar-brand">
-        <a class="navbar-item" href="/">
+        <a class="navbar-item" href="/" style="margin-top: 15px;">
           <figure class="image is-64x64 is-square is-hidden-touch">
             <img src="https://previews.123rf.com/images/veronawinner/veronawinner1804/veronawinner180400009/99138376-checklist-icon-in-flat-style-to-do-list-symbol-isolated-on-white-background-simple-abstract-check-li.jpg" srcset="https://previews.123rf.com/images/veronawinner/veronawinner1804/veronawinner180400009/99138376-checklist-icon-in-flat-style-to-do-list-symbol-isolated-on-white-background-simple-abstract-check-li.jpg" alt="logo" class="is-rounded">
           </figure>
@@ -55,21 +63,17 @@
           
         </div>
 
-        <div class="navbar-end">
+        <div class="navbar-end" style="margin-right: 20px">
           <div class="navbar-item">
             
             {% if user %}
-                <div class="buttons">
-                <a class="button" href="/logout">
+                <a class="btn btn-info" href="/logout">
                     <strong>Hello {{user}}, logout</strong>
                 </a>
-                </div>
             {% else %}
-                <div class="buttons">
-                <a class="button" href="/login">
+                <a class="btn btn-info" href="/login">
                     <strong>Sign up</strong>
                 </a>
-                </div>
             {% endif %}
             
           </div>
@@ -78,21 +82,9 @@
     </nav>
   </div>
 </header>
+{% endif %}
 
 <div class="main section">
-      
-<section class="content intro">
-    <div class="container">
-        <div class="about">
-            <p><strong>Todo List</strong></p>
-        </div>
-    </div>
-</section>
-<section class="recent">
-    <div class="container">
-
-    </div>
-</section>
 
 {% if user %}
   <div class="field">
@@ -130,13 +122,30 @@
               No reminder items! 
             {% endfor %}
           {% else %}
-          <h1 class="title">Log In</h1>
+          <div class="jumboDiv">
+          <div class="jumbotron" style="background-color: #FFFFFF; width: 850px">
+            <div style="padding-bottom: 20px;"> 
+            <img style="margin-bottom: 40px; width: 100px; height: 100px; float: left;" src="https://previews.123rf.com/images/veronawinner/veronawinner1804/veronawinner180400009/99138376-checklist-icon-in-flat-style-to-do-list-symbol-isolated-on-white-background-simple-abstract-check-li.jpg" srcset="https://previews.123rf.com/images/veronawinner/veronawinner1804/veronawinner180400009/99138376-checklist-icon-in-flat-style-to-do-list-symbol-isolated-on-white-background-simple-abstract-check-li.jpg" alt="logo" class="is-rounded">
+            <h1 class="display-4">Welcome to PyToDo</h1> 
+          </div>
+        </div>
+      </div>
+          <div class="loginDiv"> 
+          <h1 class="title"">Enter your credentials or sign up below! </h1>
           <form method="POST" action="/login/">
               {% csrf_token %}
-              <input class="input" name="username" placeholder="username" />
-              <input class="input" name="password" placeholder="password" type="password" />
-              <input class="button" type="submit" />
+              <div class="form-group" style="margin-bottom: 15px">
+                <label for="username">Username</label>
+                <input name="username" size="20" class="form-control" placeholder="Enter username">
+              </div>
+              <div class="form-group" style="margin-bottom: 15px">
+                <label for="password">Password</label>
+                <input name="password" size="20" class="form-control" placeholder="Enter password" type="password">
+              </div>
+                <input type="submit" name="xyz" value="Log In" class="btn btn-lg btn-primary button-background btn-block" style="margin-bottom: 20px">
+                <a class="btn btn-lg btn-primary button-background btn-block" href="/login" role="button">Sign Up</a>
           </form>
+        </div>
           {% endif %}  
                 
 

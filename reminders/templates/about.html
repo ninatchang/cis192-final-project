@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# fb: http://ogp.me/ns/fb#" class="hydrated"><head>
+  
+<title>Todo List</title>
+
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffe6e6">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<style type="text/css">
+  html {
+    overflow-y: scroll;
+  }
+  body {
+    padding-bottom: 40px;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: rgb(252, 221, 255);
+    }
+  .firstDiv {
+      width: 550px;
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+  }
+  .button-background {
+    background-color:  rgb(109, 174, 209);
+    border-color: #8ABAD3FF;
+  }
+  </style>
+
+<body>
+  <header class="section">
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="main navigation">
+        <a class="navbar-brand" href="/">
+            <img style="width: 30px; height:30px" src="https://previews.123rf.com/images/veronawinner/veronawinner1804/veronawinner180400009/99138376-checklist-icon-in-flat-style-to-do-list-symbol-isolated-on-white-background-simple-abstract-check-li.jpg" srcset="https://previews.123rf.com/images/veronawinner/veronawinner1804/veronawinner180400009/99138376-checklist-icon-in-flat-style-to-do-list-symbol-isolated-on-white-background-simple-abstract-check-li.jpg" alt="logo" class="is-rounded">
+            PyToDo
+          </a>
+
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto"> 
+          <li class="nav item"> 
+          <a href="/" class="nav-link"> About </a> 
+        </li>
+        <li class="nav item"> 
+            <a href="/login" class="nav-link"> Sign Up </a> 
+          </li>
+      </ul>
+        {% if user %}
+            <a lass="btn btn-info" href="/logout">
+                Hello {{user}}, logout
+            </a>
+        {% else %}
+            <a class="btn btn-info" href="/">
+                Return to Log in
+            </a>
+        {% endif %}
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="main section">
+
+    <div class="firstDiv">
+        <div class="card" style="margin-bottom: 10px"> 
+            <div class="card-header"> What is PyToDo? </div>
+            <div class="card-body"> 
+                <div class="card-text">
+                    PyToDo is an interactive web app that helps users keep track of their list of to-do's as well as the corresponding deadlines. The app also randomly recommends a to-do to finish!
+                </div>
+            </div>
+        </div>
+        <div class="card" style="margin-bottom: 10px"> 
+            <div class="card-header"> What is the class definition? </div>
+            <div class="card-body"> 
+                <div class="card-text">
+                    PyToDo is an interactive web app that helps users keep track of their daily to-do's.
+                </div>
+            </div>
+        </div>
+        <div class="card" style="margin-bottom: 10px"> 
+            <div class="card-header"> What are the packages we used? </div>
+            <div class="card-body"> 
+                <div class="card-text">
+                    PyToDo is an interactive web app that helps users keep track of their daily to-do's.
+                </div>
+            </div>
+        </div>
+  </div>
+</div>
+
+    </body>
+</html>

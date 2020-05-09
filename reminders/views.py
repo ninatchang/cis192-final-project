@@ -41,4 +41,5 @@ def chooseRandom(request):
         request.session["suggestion"] = "no active tasks"
     return redirect("/")
 
-
+def about(request):
+    return render(request, 'about.html', {})

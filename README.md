@@ -4,7 +4,7 @@
  - Nina Chang
  - Subin Lee
 ## Demo Video
-- https://drive.google.com/file/d/16C-PevXdvAWPuqNhRHOXxz4KNQBgut0W/view?usp=sharing
+- https://www.youtube.com/watch?v=ukF_dY0tf9c
 ## Installation instruction
 1. Run `pip3 install -r requirements.txt`
 2. Run `python3 manage.py runserver`

@@ -1,6 +1,6 @@
 dataclasses==0.7
 decorator==4.3.0
-Django==2.2
+Django==2.2.24
 django-bulma==0.6.0
 djongo==1.2.38
 dnspython==1.16.0

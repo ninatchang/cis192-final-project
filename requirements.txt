@@ -6,4 +6,4 @@ djongo==1.2.38
 dnspython==1.16.0
 humanfriendly==8.2
 pymongo==3.10.1
-sqlparse==0.2.4
+sqlparse==0.4.4
